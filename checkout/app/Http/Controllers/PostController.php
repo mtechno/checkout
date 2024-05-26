@@ -33,9 +33,8 @@ class PostController extends Controller
     {
         $request->validate(
             [
-                'title' => 'string|required',
-                'content' => 'string|required',
-                'image' => 'string|required',
+                'title' => 'required',
+                'body' => 'required',
                 'likes' => 'required',
                 'is_published' => 'required',
             ]
@@ -81,12 +80,4 @@ class PostController extends Controller
         return $post->destroy($post->id);
         //
     }
-
-    public function search($likes) //search by likes
-    {
-        return Post::find($likes)->get();
-        //
-        return Post::where('likes','like','%'.$post->likes.'%')->get();
-    }
-
 }

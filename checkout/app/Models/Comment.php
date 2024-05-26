@@ -7,18 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 
-class Post extends Model
+class Comment extends Model
 {
-
     use HasApiTokens, HasFactory, SoftDeletes;
 
-    protected $guarded = [];
     protected $dates = ['deleted_at'];
-    protected $fillable = ['title', 'body'];
+    protected $fillable = ['user_id', 'post_id', 'parent_id', 'body'];
 
-    public function comments()
+    public function user()
     {
-        return $this->hasMany(Comment::class)->whereNull('parent_id');
+        return $this->belongsTo(User::class);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Comment::class, 'parent_id');
     }
 
 

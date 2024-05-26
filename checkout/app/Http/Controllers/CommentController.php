@@ -2,26 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Comment;
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function store(Request $request)
+    public function store(StoreCommentRequest $request)
     {
         $request->validate([
-            'body'=>'required',
+            'body' => 'required',
+            'likes' => 'required',
         ]);
 
         $input = $request->all();
         $input['user_id'] = auth()->user()->id;
 
-        Comment::create($input);
-
-        return back();
+        return Comment::create($input);
+        //        return Comment::create($request->all());
     }
+
 
     public function index(Post $post)
     {
@@ -31,7 +32,7 @@ class CommentController extends Controller
 
     public function show(Comment $comment)
     {
-        return Comment::where('id','like','%'.$comment->id.'%')->get();
+        return Comment::where('id', 'like', '%' . $comment->id . '%')->get();
         //
     }
 

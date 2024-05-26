@@ -14,7 +14,10 @@ class Post extends Model
 
     protected $guarded = [];
     protected $dates = ['deleted_at'];
-    protected $fillable = ['title', 'body'];
+    protected $fillable = [
+        'title',
+        'body',
+    ];
 
     public function comments()
     {

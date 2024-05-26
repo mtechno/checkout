@@ -12,7 +12,14 @@ class Comment extends Model
     use HasApiTokens, HasFactory, SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    protected $fillable = ['user_id', 'post_id', 'parent_id', 'body'];
+    protected $fillable = [
+        'user_id',
+        'post_id',
+        'parent_id',
+        'body',
+        'title',
+        'likes',
+    ];
 
     public function user()
     {

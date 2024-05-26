@@ -35,7 +35,6 @@ class PostController extends Controller
             [
                 'title' => 'required',
                 'body' => 'required',
-                'likes' => 'required',
                 'is_published' => 'required',
             ]
         );

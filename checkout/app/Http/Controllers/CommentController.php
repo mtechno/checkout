@@ -30,9 +30,9 @@ class CommentController extends Controller
         //
     }
 
-    public function show(Comment $comment)
+    public function show($id)
     {
-        return Comment::where('id', 'like', '%' . $comment->id . '%')->get();
+        return Comment::where('id', 'like', '%' . $id . '%')->get();
         //
     }
 

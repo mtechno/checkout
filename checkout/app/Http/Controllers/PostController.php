@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -35,7 +35,6 @@ class PostController extends Controller
             [
                 'title' => 'required',
                 'body' => 'required',
-                'is_published' => 'required',
             ]
         );
 
@@ -46,9 +45,10 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        return Post::where('id','like','%'.$post->id.'%')->get();
+
+        return Post::where('id', 'like', '%' . $id . '%')->get();
         //
     }
 
@@ -65,6 +65,7 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, $id)
     {
+
         $post = Post::find($id);
         $post->update($request->all());
         return $post;
@@ -74,8 +75,9 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
+        $post = Post::find($id);
         return $post->destroy($post->id);
         //
     }

@@ -31,13 +31,15 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+//        dd(auth()->user());
         $request->validate(
             [
                 'title' => 'required',
                 'body' => 'required',
+                'user_id' => 'required',
             ]
         );
-
+//        dd($request->all());
         return Post::create($request->all());
         //
     }
@@ -47,8 +49,11 @@ class PostController extends Controller
      */
     public function show($id)
     {
+        $post = Post::where('id', $id)->get();
+        $comments = Post::all()->comments();
+        return [$post];
+//        return Post::where('id', 'like', '%' . $id . '%')->get();
 
-        return Post::where('id', 'like', '%' . $id . '%')->get();
         //
     }
 

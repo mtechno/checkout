@@ -15,13 +15,19 @@ class Post extends Model
     protected $guarded = [];
     protected $dates = ['deleted_at'];
     protected $fillable = [
+        'user_id',
         'title',
         'body',
+        'is_published',
     ];
 
     public function comments()
     {
-        return $this->hasMany(Comment::class)->whereNull('parent_id');
+        return $this->hasMany(Comment::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
 

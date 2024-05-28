@@ -34,14 +34,24 @@ class AuthController extends Controller
 
     }
 
-    public function logout(Request $request){
+    public function login(Request $request)
+    {
+        $fields = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|string|unique:users,email',
+            'password' => 'required|string|confirmed',
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
         if (
             auth()->user() ?? 0
         )
-        auth()->logout();
+            auth()->logout();
 
         return [
-            'message'=>'Logged out'
+            'message' => 'Logged out'
         ];
     }
     //

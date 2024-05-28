@@ -13,11 +13,9 @@ class Comment extends Model
 
     protected $dates = ['deleted_at'];
     protected $fillable = [
-        'user_id',
         'post_id',
-        'parent_id',
+        'user_id',
         'body',
-        'title',
         'likes',
     ];
 
@@ -26,10 +24,10 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function replies()
-    {
-        return $this->hasMany(Comment::class, 'parent_id');
-    }
+//    public function replies()
+//    {
+//        return $this->hasMany(Comment::class, 'parent_id');
+//    }
 
 
 }

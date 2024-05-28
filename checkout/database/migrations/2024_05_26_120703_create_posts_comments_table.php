@@ -14,6 +14,7 @@ return new class extends Migration
 
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('title');
             $table->text('body');
             $table->boolean('is_published')->default(1);
@@ -23,9 +24,8 @@ return new class extends Migration
 
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('post_id')->unsigned();
-            $table->integer('parent_id')->unsigned()->nullable();
+            $table->foreignId('post_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->text('body');
             $table->unsignedInteger('likes')->nullable();
             $table->timestamps();
